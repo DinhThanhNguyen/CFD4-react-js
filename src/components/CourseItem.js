@@ -34,7 +34,7 @@ export default function CourseItem(props) {
                             <div className="avatar">
                                 <img src="/img/avt.png" alt="" />
                             </div>
-                            <div className="name">Trần Nghĩa</div>
+                            <div className="name">{props.teacher}</div>
                         </div>
                         <div className="register-btn">Đăng Ký</div>
                     </div>
