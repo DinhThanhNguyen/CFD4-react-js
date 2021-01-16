@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
     return (
@@ -13,10 +14,10 @@ export default function Header() {
                         </div>
                         <span className="text">menu</span>
                     </div>
-                    <a href="#" className="logo">
+                    <Link to="/" className="logo">
                         <img src="img/logo.svg" alt="" />
                         <h1>CFD</h1>
-                    </a>
+                    </Link>
                     <div className="right">
                         <div className="have-login">
                             <div className="account">
@@ -30,8 +31,8 @@ export default function Header() {
                             <div className="hamberger">
                             </div>
                             <div className="sub">
-                                <a href="#">Khóa học của tôi</a>
-                                <a href="#">Thông tin tài khoản</a>
+                                <Link to="khoa-hoc">Khóa học của tôi</Link>
+                                <Link to="thong-tin-ca-nhan">Thông tin tài khoản</Link>
                                 <a href="#">Đăng xuất</a>
                             </div>
                         </div>

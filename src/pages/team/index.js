@@ -1,4 +1,5 @@
 import React from 'react'
+import Member from './Components/Member'
 
 export default function Team() {
     return (
@@ -6,157 +7,23 @@ export default function Team() {
         <section>
           <div className="container">
             <div className="top">
-              <h2 className="main-title">cfd team</h2>
+              <h2 className="main-title">CFD team</h2>
               <p className="top-des">Lorem ipsum dolor sit amet consectetur adipiscing elit. aliquam tincidunt
                 elementum
                 sem non luctus
               </p>
             </div>
             <div className="list row">
-              <div className="item col-md-6 col-sm-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      trần nghĩa
-                    </div>
-                    <p className="title">Founder &amp; Creative Front-End Developer</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-6 col-sm-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      đặng thuyền vương
-                    </div>
-                    <p className="title">Co-Founder &amp; Fullstack Developer</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-6 col-sm-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      đặng thuyền quân
-                    </div>
-                    <p className="title">Co-Founder &amp; Backend Developer</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-6 col-sm-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      nguyễn đức huy
-                    </div>
-                    <p className="title">Co-Founder &amp; Front-End Developer</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <span className="text">H</span>
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      Diệp anh thy
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      huỳnh tiến tài
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      Ngô thành long
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      trần anh tuấn
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      ngô thành long
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      nguyễn thành tùng
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-md-3 col-sm-4 col-xs-6">
-                <div className="wrap">
-                  <div className="cover">
-                    <img src="/img/thumb-member.jpg" alt="" />
-                  </div>
-                  <div className="info">
-                    <div className="name">
-                      phạm thành trung
-                    </div>
-                    <p className="title">CFD1-Offline</p>
-                  </div>
-                </div>
-              </div>
+              <Member className="item col-md-6 col-sm-6" thumbnail="/img/thumb-member.jpg" name="Trần Nghĩa" title="Founder CFD & Creative Front-End Developer" />
+              <Member className="item col-md-6 col-sm-6" thumbnail="/img/thumb-member.jpg" name="Đặng Thuyền Vương" title="Co-Founder CFD & Fullstack Developer" />
+              <Member className="item col-md-6 col-sm-6" thumbnail="/img/thumb-member.jpg" name="Đặng Thuyền Quân" title="Co-founder CFD & Backend Developer" />
+              <Member className="item col-md-6 col-sm-6" thumbnail="/img/thumb-member.jpg" name="Nguyễn Đức Huy" title="Co-founder & Front-end Developer" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Diệp Anh Thy" title="CFD1-Offline" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Huỳnh Tiến Tài" title="CFD1-Offline" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Ngô Thành Long" title="CFD1-Offline" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Trần Anh Tuấn" title="CFD2-Offline" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Nguyễn Thành Tùng" title="CFD2-Offline" />
+              <Member className="item col-md-3 col-sm-4 col-xs-6" thumbnail="/img/thumb-member.jpg" name="Phạm Thành Trung" title="CFD2-Offline" />
             </div>
           </div>
         </section>
