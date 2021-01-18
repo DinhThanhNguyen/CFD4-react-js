@@ -1,6 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+const style = {
+    inputError: {
+        color: 'red',
+        fontSize: '14px',
+        textAlign: 'center',
+        marginBottom: '20px'
+    }
+}
 
 export default function Register() {
+    let [form, setForm] = useState({
+        username : '',
+        phone : '',
+        email : '',
+        fb : '',
+        payment : 'chuyen-khoan',
+        note : ''
+    })
+
+    let [error, setError] = useState({});
+
+    function inputChange(event) {
+        let target = event.target;
+
+        let value = target.value;
+
+        let name = target.getAttribute('name');
+
+        form[name] = value;
+
+        setForm({
+            ...form
+        })
+    }
+    function validateForm() {
+        let error = {};
+        if(!form.username){
+            error['username'] = "Họ và Tên không được để trống";
+        }
+
+        if(!form.phone){
+            error['phone'] = "Số điện thoại không được để trống";
+        }
+
+        if(!form.email){
+            error['email'] = "Email không được để trống";
+        }
+
+        if(!form.fb){
+            error['fb'] = "Facebook không được để trống";
+        }
+
+        setError(error)
+    }
     return (
         <main className="register-course" id="main">
             <section>
@@ -16,20 +69,32 @@ export default function Register() {
                         <div className="form">
                             <label>
                                 <p>Họ và tên<span>*</span></p>
-                                <input type="text" placeholder="Họ và tên bạn" />
+                                <input type="text" placeholder="Họ và tên bạn" onChange={inputChange} name="username" value={form.username} />
                             </label>
+                            {
+                                error.username && <p className="error" style = {style.inputError} >{error.username}</p>
+                            }
                             <label>
                                 <p>Số điện thoại<span>*</span></p>
-                                <input type="text" placeholder="Số điện thoại" />
+                                <input type="text" placeholder="Số điện thoại" onChange={inputChange} name="phone" value={form.phone} />
                             </label>
+                            {
+                                error.phone && <p className="error" style = {style.inputError} >{error.phone}</p>
+                            }
                             <label>
                                 <p>Email<span>*</span></p>
-                                <input type="text" placeholder="Email của bạn" />
+                                <input type="text" placeholder="Email của bạn" onChange={inputChange} name="email" value={form.email} />
                             </label>
+                            {
+                                error.email && <p className="error" style = {style.inputError} >{error.email}</p>
+                            }
                             <label>
                                 <p>URL Facebook<span>*</span></p>
-                                <input type="text" placeholder="https://facebook.com" />
+                                <input type="text" placeholder="https://facebook.com" onChange={inputChange} name="fb" value={form.fb} />
                             </label>
+                            {
+                                error.fb && <p className="error" style = {style.inputError} >{error.fb}</p>
+                            }
                             <label className="disable">
                                 <p>Sử dụng COIN</p>
                                 <div className="checkcontainer">
@@ -52,9 +117,9 @@ export default function Register() {
                             </label>
                             <label>
                                 <p>Ý kiến cá nhân</p>
-                                <input type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." />
+                                <input type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." onChange={inputChange} name="note" value={form.note} />
                             </label>
-                            <div className="btn main rect">đăng ký</div>
+                            <div className="btn main rect" onClick={validateForm}>đăng ký</div>
                         </div>
                     </div>
                 </div>
