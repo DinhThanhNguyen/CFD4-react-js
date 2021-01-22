@@ -3,6 +3,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import './assets/css/Style.scss';
 import Header from './components/header';
 import Home from './pages/home';
 import Footer from './components/footer';
@@ -19,7 +20,7 @@ import Email from './pages/email';
 import Error from './pages/404-page';
 import Faq from './pages/faq';
 import CourseDetail from './pages/course-detail';
-
+import Loading from './components/Loading';
 function App() {
   return <BrowserRouter>
   <Header />
@@ -40,6 +41,7 @@ function App() {
   </Switch>
   <Footer />
   <PopupLogin />
+  <Loading />
   </BrowserRouter>
 }
 

@@ -1,0 +1,19 @@
+.pageLoading{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Loading{
+        width: 100px;
+        height: 100px;
+        border-radius: 100000px;
+        background-color: #03afab;
+        transition: transform 6s ease-in-out;
+        position: absolute;
+        transform: scale(0);
+    }
+}

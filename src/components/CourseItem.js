@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CourseItem(props) {
     return (
@@ -36,7 +37,7 @@ export default function CourseItem(props) {
                             </div>
                             <div className="name">{props.teacher}</div>
                         </div>
-                        <div className="register-btn">Đăng Ký</div>
+                        <Link to="dang-ky" className="register-btn">Đăng Ký</Link>
                     </div>
                 </div>
             </div>

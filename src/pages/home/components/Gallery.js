@@ -1,6 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Gallery() {
+  let $= window.$
+  useEffect( () => {
+    function teamSlider() {
+      let $carouselGallery = $(".homepage .section-gallery .list"),
+          $progressBar = $('.homepage .section-gallery .timeline .process');
+
+      $carouselGallery.flickity({
+          contain: true,
+          wrapAround: false,
+          freeScroll: true,
+          cellAlign: 'left',
+          lazyLoad: 3,
+          imagesLoaded: true,
+          prevNextButtons: false
+      });
+
+      $carouselGallery.on('scroll.flickity', function (event, progress) {
+          progress = Math.max(0.05, Math.min(1, progress));
+          $progressBar.width(progress * 100 + '%');
+      });
+
+      let ctrPrevGallery = $('.homepage .section-gallery .btn_ctr.prev'),
+          ctrNextGallery = $('.homepage .section-gallery .btn_ctr.next');
+
+      ctrPrevGallery.on('click', function () {
+          $carouselGallery.flickity('previous');
+      });
+      ctrNextGallery.on('click', function () {
+          $carouselGallery.flickity('next');
+      });
+  }
+  teamSlider();
+  }, [])
+
+
     return (
         <section className="section-gallery">
           <div className="textbox">

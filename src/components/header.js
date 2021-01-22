@@ -1,7 +1,56 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 export default function Header() {
+
+    let $ = window.$
+    useEffect( () => {
+        $('body').on('click', function () {
+            $('.select.active .sub').fadeOut(200);
+            $('.select sub').fadeOut(200);
+        })
+    
+        $('.menu-hambeger').on('click', function () {
+            $('body').toggleClass('menu-is-show');
+        });
+    
+        $('#header nav ul').on('click', function (e) {
+            e.stopPropagation();
+        })
+        $('.overlay_nav').on('click', function (e) {
+            $('body').removeClass('menu-is-show');
+        });
+    
+        $(document).keyup(function (e) {
+            if (e.key === "Escape") {
+                $('body').removeClass('menu-is-show');
+            }
+        })
+    }, [])
+
+    let history = useHistory();
+
+    function delayLink(e){
+        e.preventDefault();
+        let pageLoading = document.querySelector('.pageLoading');
+        let loadingEffect = pageLoading.querySelector('.Loading')
+
+
+        let scale = Math.sqrt(Math.pow(window.outerHeight, 2) + Math.pow(window.outerWidth, 2)) / 100*2
+        loadingEffect.style.transform = 'translate(-50%, -50%) scale(${scale})'
+        loadingEffect.left = '${e.clientX}px'
+        loadingEffect.top = '${e.clientY}px'
+        setTimeout( () => {
+            history.push(e.target.href?.replace(window.location.origin, '') || '/')
+            $('.overlay_nav').trigger('click');
+        }, 300)
+
+        setTimeout(() => {
+            loadingEffect.style.transform = 'translate(-50%, -50%) scale(0)'
+        }, 600)
+    }
+
     return (
         <>
             <header id="header">
@@ -14,7 +63,7 @@ export default function Header() {
                         </div>
                         <span className="text">menu</span>
                     </div>
-                    <Link to="/" className="logo">
+                    <Link to="/" onClick={delayLink} className="logo">
                         <img src="img/logo.svg" alt="" />
                         <h1>CFD</h1>
                     </Link>
@@ -31,8 +80,8 @@ export default function Header() {
                             <div className="hamberger">
                             </div>
                             <div className="sub">
-                                <Link to="khoa-hoc">Khóa học của tôi</Link>
-                                <Link to="thong-tin-ca-nhan">Thông tin tài khoản</Link>
+                                <Link to="/thong-tin-ca-nhan" onClick={delayLink} >Thông tin tài khoản</Link>
+                                <Link to="/thong-tin-ca-nhan/khoa-hoc-cua-toi" onClick={delayLink} >Khóa học của tôi</Link>
                                 <a href="#">Đăng xuất</a>
                             </div>
                         </div>
@@ -49,19 +98,19 @@ export default function Header() {
                         <a href="#">Đăng ký / Đăng nhập</a>
                     </li>
                     <li className="active">
-                        <a href="#">Trang chủ</a>
+                        <Link to="/" onClick={delayLink} >Trang chủ</Link>
                     </li>
                     <li>
-                        <a href="#">CFD Team</a>
+                        <Link to="/team" onClick={delayLink} >CFD Team</Link>
                     </li>
                     <li>
-                        <a href="#">Khóa Học</a>
+                        <Link to="/chi-tiet-khoa-hoc" onClick={delayLink} >Khóa Học</Link>
                     </li>
                     <li>
-                        <a href="#">Dự Án</a>
+                        <Link to="/thong-tin-ca-nhan/du-an" onClick={delayLink} >Dự Án</Link>
                     </li>
                     <li>
-                        <a href="#">Liên hệ</a>
+                        <Link to="hop-tac" onClick={delayLink} >Liên hệ</Link>
                     </li>
                 </ul>
             </nav>

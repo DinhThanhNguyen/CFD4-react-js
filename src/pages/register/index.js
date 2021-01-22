@@ -9,6 +9,18 @@ const style = {
     }
 }
 
+function isVietnamesePhoneNumber(number) {
+    return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+}
+function isUrl(s) {
+    var regexp = /(ftp|http|https):\/\/www.facebook.com(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    return regexp.test(s);
+}
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 export default function Register() {
     let [form, setForm] = useState({
         username : '',
@@ -42,14 +54,20 @@ export default function Register() {
 
         if(!form.phone){
             error['phone'] = "Số điện thoại không được để trống";
+        }else if(!isVietnamesePhoneNumber(form.phone)){
+            error['phone'] = "Số điện thoại không đúng định dạng";
         }
 
         if(!form.email){
             error['email'] = "Email không được để trống";
+        }else if(!validateEmail(form.email)){
+            error['email'] = "Email không đúng định dạng";
         }
 
         if(!form.fb){
             error['fb'] = "Facebook không được để trống";
+        }else if(!(isUrl(form.fb))){
+            error['fb'] = "Facebook không đúng định dạng";
         }
 
         setError(error)
