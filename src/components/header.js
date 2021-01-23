@@ -55,7 +55,7 @@ export default function Header() {
         <>
             <header id="header">
                 <div className="wrap">
-                    <div className="menu-hambeger">
+                    <div className="menu-hambeger" onClick={delayLink}>
                         <div className="button">
                             <span />
                             <span />
