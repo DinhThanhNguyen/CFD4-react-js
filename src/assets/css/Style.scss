@@ -7,12 +7,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .Loading{
+    pointer-events: none;
+    >div{
         width: 100px;
         height: 100px;
         border-radius: 100000px;
         background-color: #03afab;
-        transition: transform 6s ease-in-out;
+        transition: transform 0.6s ease-in-out;
         position: absolute;
         transform: scale(0);
     }
