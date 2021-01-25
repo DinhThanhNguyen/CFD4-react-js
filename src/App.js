@@ -8,6 +8,7 @@ import Header from './components/header';
 import Home from './pages/home';
 import Footer from './components/footer';
 import PopupLogin from './components/popupLogin';
+import PopupRegister from './components/popupRegister'
 import Team from './pages/team';
 import Payments from './pages/thanh-toan';
 import Profile from './pages/profile';
@@ -31,14 +32,22 @@ export const context = React.createContext({});
 function App() {
   let refLogin = useRef();
 
+  let refRegister = useRef();
+
   function openPopupLogin() {
     refLogin.current.style.display = 'flex'
   }
   function closePopupLogin() {
     refLogin.current.style.display = 'none'
   }
+  function openPopupRegister() {
+    refRegister.current.style.display = 'flex'
+  }
+  function closePopupRegister() {
+    refRegister.current.style.display = 'none'
+  }
   return <AuthProvider>
-    <context.Provider value={{ openPopupLogin, closePopupLogin }}>
+    <context.Provider value={{ openPopupLogin, closePopupLogin, openPopupRegister, closePopupRegister }}>
       <BrowserRouter>
         <Header />
         <Switch>
@@ -58,6 +67,7 @@ function App() {
         </Switch>
         <Footer />
         <PopupLogin ref={refLogin} />
+        <PopupRegister ref={refRegister} />
         <Loading />
       </BrowserRouter>
     </context.Provider>

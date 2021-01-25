@@ -38,11 +38,11 @@ export default function Header() {
         let div = pageLoading.querySelector('.loading');
 
 
-        // let scale = Math.sqrt(Math.pow(window.outerHeight, 2) + Math.pow(window.outerWidth, 2)) / 100 * 2;
+        let scale = Math.sqrt(Math.pow(window.outerHeight, 2) + Math.pow(window.outerWidth, 2)) / 100 * 2;
 
-        div.style.transform = 'translate(-50%, -50%) scale(100)';
-        div.style.left = '${e.clientX}px';
-        div.style.top = '${e.clientY}px';
+        div.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        div.style.left = `${e.clientX}px`;
+        div.style.top = `${e.clientY}px`;
         setTimeout(() => {
             history.push(e.target.href?.replace(window.location.origin, '') || '/');
             $('.overlay_nav').trigger('click');
@@ -95,7 +95,7 @@ export default function Header() {
                             ) :
                                 <div class="not-login bg-none">
                                     <a href="#" class="btn-register" onClick={contextLogin.openPopupLogin}>Đăng nhập</a>
-                                    <Link to="dang-ky" onClick={delayLink} class="btn main btn-open-login">Đăng ký</Link>
+                                    <a href="#" class="btn main btn-open-login" onClick={contextLogin.openPopupRegister} >Đăng ký</a>
                                 </div>
                         }
 

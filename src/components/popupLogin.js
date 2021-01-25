@@ -20,6 +20,7 @@ function PopupLogin(props, ref) {
         password: ''
     },{
         rule: {
+           
             username: {
                 required: true,
                 pattern: 'email'
@@ -31,6 +32,7 @@ function PopupLogin(props, ref) {
             }
         }, 
         message: {
+            
             username: {
                 pattern: 'Email không không được để trống'
             },
@@ -39,8 +41,24 @@ function PopupLogin(props, ref) {
             }
         }
     })
-    function btnSubmit() {
+    function btnSubmit(e) {
+        e.preventDefault();
         let error = submit();
+
+
+        if(Object.keys(error).length === 0){
+            fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/login', {
+                method: 'POST',
+                body: JSON.stringify(form),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            }). then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                })
+        }
+
     }
 
     let contextLogin = useContext(context);

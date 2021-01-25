@@ -40,12 +40,12 @@ export default function useValidateForm(initialValue, validate) {
                         errorObject[i] = message?.[i]?.pattern || 'Trường này đúng định dạng'
                     }
                 }
-                // if(r.min && form[i]?.length < r.min){
-                //     errorObject[i] = message?.[i]?.r.min || `Trường này phải dài hơn ${r.min} kí tự`
-                // }
-                // if(r.max && form[i]?.length > r.max){
-                //     errorObject[i] = message?.[i]?.r.max || `Trường này không được dài hơn ${r.max} kí tự`
-                // }
+                if(r.min && form[i]?.length < r.min){
+                    errorObject[i] = message?.[i]?.min || `Trường này phải dài hơn ${r.min} kí tự`
+                }
+                if(r.max && form[i]?.length > r.max){
+                    errorObject[i] = message?.[i]?.max || `Trường này không được dài hơn ${r.max} kí tự`
+                }
                 for(let i in errorObject ){
                     document.querySelector(`[name="${i}"]`).classList.add('error');
                 }
