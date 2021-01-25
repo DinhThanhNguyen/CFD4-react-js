@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { context } from '../App';
+import { useLogin } from '../core/hook/useLogin';
 import useValidateForm from '../core/hook/useValidateForm';
 
 
@@ -41,10 +42,10 @@ function PopupLogin(props, ref) {
             }
         }
     })
+    let login = useLogin();
     function btnSubmit(e) {
         e.preventDefault();
         let error = submit();
-
 
         if(Object.keys(error).length === 0){
             fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/login', {
@@ -55,7 +56,11 @@ function PopupLogin(props, ref) {
                 }
             }). then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    if(res.data){
+                        login.activeLogin(res.data)
+
+                        contextLogin.closePopupLogin()
+                    }
                 })
         }
 

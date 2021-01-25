@@ -15,16 +15,17 @@ const style = {
 }
 
 function PopupRegister(props, ref) {
-  let login = useLogin();
+  
   let { form, inputChange, submit, error } = useValidateForm({
     name: '',
+    email: '',
     password: ''
   }, {
     rule: {
-      title: {
+      name: {
         required: true
       },
-      username: {
+      email: {
         required: true,
         pattern: 'email'
       },
@@ -35,10 +36,10 @@ function PopupRegister(props, ref) {
       }
     },
     message: {
-      title: {
+      name: {
         required: 'Họ và tên không được để trống'
       },
-      username: {
+      email: {
         pattern: 'Email không không được để trống'
       },
       password: {
@@ -46,6 +47,10 @@ function PopupRegister(props, ref) {
       }
     }
   })
+
+  let login = useLogin();
+  let registerContext = useContext(context)
+
   function btnSubmit(e) {
     e.preventDefault();
     let error = submit();
@@ -60,28 +65,28 @@ function PopupRegister(props, ref) {
         }
       }).then(res => res.json())
         .then(res => {
-          if (res.data) {
-            login.active(res.data)
-          }
+          if(res.data){
+            login.activeLogin(res.data)
+
+            registerContext.closePopupRegister()
+        }
         })
     }
 
   }
-
-  let registerContext = useContext(context)
 
 
   return ReactDOM.createPortal(
     <div className="popup-form popup-login" ref={ref} style={{ display: 'none' }}>
       <div className="wrap">
         <h2 className="title">Đăng ký</h2>
-        <input type="text" placeholder="Họ và Tên" onChange={inputChange} name="title" value={form.title} />
+        <input type="text" placeholder="Họ và Tên" onChange={inputChange} name="name" value={form.name} />
         {
-          error.title && <p className="error" style={style.inputError} >{error.title}</p>
+          error.name && <p className="error" style={style.inputError} >{error.name}</p>
         }
-        <input type="text" placeholder="Email / Số điện thoại" onChange={inputChange} name="username" value={form.username} />
+        <input type="text" placeholder="Email / Số điện thoại" onChange={inputChange} name="email" value={form.email} />
         {
-          error.username && <p className="error" style={style.inputError} >{error.username}</p>
+          error.email && <p className="error" style={style.inputError} >{error.email}</p>
         }
         <input type="password" placeholder="Mật khẩu" onChange={inputChange} name="password" value={form.password} />
         {
