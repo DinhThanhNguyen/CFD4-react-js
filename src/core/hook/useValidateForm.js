@@ -14,13 +14,13 @@ export default function useValidateForm(initialValue, validate) {
                 [event.target.getAttribute('name')]: event.target.value
             })
         }
-
         let [error, setError] = useState({});
-        let errorObject = {}
+       
 
         function submit() {
+            document.querySelectorAll('error').forEach(e => e.classList.removeClass('error'))
             let {rule, message} = validate;
-
+            let errorObject = {}
 
             for(let i in rule){
                 let r = rule[i];
@@ -39,6 +39,15 @@ export default function useValidateForm(initialValue, validate) {
                     if(!pattern.test(form[i])){
                         errorObject[i] = message?.[i]?.pattern || 'Trường này đúng định dạng'
                     }
+                }
+                // if(r.min && form[i]?.length < r.min){
+                //     errorObject[i] = message?.[i]?.r.min || `Trường này phải dài hơn ${r.min} kí tự`
+                // }
+                // if(r.max && form[i]?.length > r.max){
+                //     errorObject[i] = message?.[i]?.r.max || `Trường này không được dài hơn ${r.max} kí tự`
+                // }
+                for(let i in errorObject ){
+                    document.querySelector(`[name="${i}"]`).classList.add('error');
                 }
             }
             setError(errorObject);

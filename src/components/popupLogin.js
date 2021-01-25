@@ -1,8 +1,48 @@
 import React, { useContext, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { context } from '../App';
+import useValidateForm from '../core/hook/useValidateForm';
+
+
+const style = {
+    inputError: {
+        color: 'red',
+        fontSize: '14px',
+        textAlign: 'center',
+        marginBottom: '20px'
+    }
+}
 
 function PopupLogin(props, ref) {
+
+    let {form, inputChange, submit, error} = useValidateForm({
+        name: '',
+        password: ''
+    },{
+        rule: {
+            username: {
+                required: true,
+                pattern: 'email'
+            },
+            password: {
+                required: true,
+                min: 6,
+                max: 32
+            }
+        }, 
+        message: {
+            username: {
+                pattern: 'Email không không được để trống'
+            },
+            password: {
+                pattern: 'Trường này không được để trống'
+            }
+        }
+    })
+    function btnSubmit() {
+        let error = submit();
+    }
+
     let contextLogin = useContext(context);
     return ReactDOM.createPortal(
         <div className="popup-form popup-login" ref={ref} style={{ display: 'none' }}>
@@ -10,8 +50,14 @@ function PopupLogin(props, ref) {
                 {/* login-form */}
                 <div className="ct_login" style={{ display: 'block' }}>
                     <h2 className="title">Đăng nhập</h2>
-                    <input type="text" placeholder="Email / Số điện thoại" />
-                    <input type="password" placeholder="Mật khẩu" />
+                    <input type="text" placeholder="Email / Số điện thoại" onChange={inputChange} name="username" value={form.username} />
+                    {
+                        error.username && <p className="error" style={style.inputError} >{error.username}</p>
+                    }                   
+                    <input type="password" placeholder="Mật khẩu" onChange={inputChange} name="password" value={form.password} />
+                    {
+                        error.password && <p className="error" style={style.inputError} >{error.password}</p>
+                    }
                     <div className="remember">
                         <label className="btn-remember">
                             <div>
@@ -21,7 +67,7 @@ function PopupLogin(props, ref) {
                         </label>
                         <a href="#" className="forget">Quên mật khẩu?</a>
                     </div>
-                    <div className="btn rect main btn-login">đăng nhập</div>
+                    <div className="btn rect main btn-login" onClick={btnSubmit}>đăng nhập</div>
                     <div className="text-register" style={{}}>
                         <strong>hoặc đăng ký bằng</strong>
                     </div>

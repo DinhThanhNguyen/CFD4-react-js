@@ -51,13 +51,13 @@ export default function Register() {
                 required : 'Họ và Tên không được để trống'
             },
             phone: {
-                pattern: 'Số điện thoại không đúng định dạng'
+                pattern: 'Số điện thoại không được để trống'
             },
             email: {
-                pattern: 'Email không đúng định dạng'
+                pattern: 'Email không được để trống'
             },
             fb: {
-                pattern: 'FB URL không đúng định dạng'
+                pattern: 'FB URL không được để trống'
             }
         }
     })

@@ -114,7 +114,7 @@ export default function Header() {
                         <Link to="/team" onClick={delayLink} >CFD Team</Link>
                     </li>
                     <li>
-                        <Link to="/chi-tiet-khoa-hoc" onClick={delayLink} >Khóa Học</Link>
+                        <Link to="/khoa-hoc" onClick={delayLink} >Khóa Học</Link>
                     </li>
                     <li>
                         <Link to="/thong-tin-ca-nhan/du-an" onClick={delayLink} >Dự Án</Link>
