@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useValidateForm from '../../core/hook/useValidateForm';
 
 const style = {
     inputError: {
@@ -9,68 +10,106 @@ const style = {
     }
 }
 
-function isVietnamesePhoneNumber(number) {
-    return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
-}
-function isUrl(s) {
-    var regexp = /(ftp|http|https):\/\/www.facebook.com(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-    return regexp.test(s);
-}
-function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
+// function isVietnamesePhoneNumber(number) {
+//     return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+// }
+// function isUrl(s) {
+//     var regexp = /(ftp|http|https):\/\/www.facebook.com(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+//     return regexp.test(s);
+// }
+// function validateEmail(email) {
+//     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(email);
+// }
 
 export default function Register() {
-    let [form, setForm] = useState({
-        username : '',
-        phone : '',
-        email : '',
-        fb : '',
-        payment : 'chuyen-khoan',
-        note : ''
+
+    let { form, error, inputChange, submit } = useValidateForm({
+        username: '',
+        phone: '',
+        email: '',
+        fb: '',
+        payment: 'chuyen-khoan',
+        note: ''
+    }, {
+        rule: {
+            username: {
+                required : true
+            },
+            phone: {
+                pattern: 'phone'
+            },
+            email: {
+                pattern: 'email'
+            },
+            fb: {
+                pattern: 'url'
+            }
+        },
+        massage: {
+            username: {
+                required : 'Họ và Tên không được để trống'
+            },
+            phone: {
+                pattern: 'Số điện thoại không đúng định dạng'
+            },
+            email: {
+                pattern: 'Email không đúng định dạng'
+            },
+            fb: {
+                pattern: 'FB URL không đúng định dạng'
+            }
+        }
     })
 
-    let [error, setError] = useState({});
 
-    function inputChange(event) {
-        let target = event.target;
 
-        let value = target.value;
 
-        let name = target.getAttribute('name');
 
-        form[name] = value;
+    // let [error, setError] = useState({});
 
-        setForm({
-            ...form
-        })
-    }
+    // function inputChange(event) {
+    //     let target = event.target;
+
+    //     let value = target.value;
+
+    //     let name = target.getAttribute('name');
+
+    //     form[name] = value;
+
+    //     setForm({
+    //         ...form
+    //     })
+    // }
     function validateForm() {
-        let error = {};
-        if(!form.username){
-            error['username'] = "Họ và Tên không được để trống";
-        }
+        
+        // if (!form.username) {
+        //     error['username'] = "Họ và Tên không được để trống";
+        // }
 
-        if(!form.phone){
-            error['phone'] = "Số điện thoại không được để trống";
-        }else if(!isVietnamesePhoneNumber(form.phone)){
-            error['phone'] = "Số điện thoại không đúng định dạng";
-        }
+        // if (!form.phone) {
+        //     error['phone'] = "Số điện thoại không được để trống";
+        // } else if (!isVietnamesePhoneNumber(form.phone)) {
+        //     error['phone'] = "Số điện thoại không đúng định dạng";
+        // }
 
-        if(!form.email){
-            error['email'] = "Email không được để trống";
-        }else if(!validateEmail(form.email)){
-            error['email'] = "Email không đúng định dạng";
-        }
+        // if (!form.email) {
+        //     error['email'] = "Email không được để trống";
+        // } else if (!validateEmail(form.email)) {
+        //     error['email'] = "Email không đúng định dạng";
+        // }
 
-        if(!form.fb){
-            error['fb'] = "Facebook không được để trống";
-        }else if(!(isUrl(form.fb))){
-            error['fb'] = "Facebook không đúng định dạng";
-        }
+        // if (!form.fb) {
+        //     error['fb'] = "Facebook không được để trống";
+        // } else if (!(isUrl(form.fb))) {
+        //     error['fb'] = "Facebook không đúng định dạng";
+        // }
 
-        setError(error)
+        // setError(error)
+        // let error = submit();
+
+
+        let error = submit();
     }
     return (
         <main className="register-course" id="main">
@@ -90,28 +129,28 @@ export default function Register() {
                                 <input type="text" placeholder="Họ và tên bạn" onChange={inputChange} name="username" value={form.username} />
                             </label>
                             {
-                                error.username && <p className="error" style = {style.inputError} >{error.username}</p>
+                                error.username && <p className="error" style={style.inputError} >{error.username}</p>
                             }
                             <label>
                                 <p>Số điện thoại<span>*</span></p>
                                 <input type="text" placeholder="Số điện thoại" onChange={inputChange} name="phone" value={form.phone} />
                             </label>
                             {
-                                error.phone && <p className="error" style = {style.inputError} >{error.phone}</p>
+                                error.phone && <p className="error" style={style.inputError} >{error.phone}</p>
                             }
                             <label>
                                 <p>Email<span>*</span></p>
                                 <input type="text" placeholder="Email của bạn" onChange={inputChange} name="email" value={form.email} />
                             </label>
                             {
-                                error.email && <p className="error" style = {style.inputError} >{error.email}</p>
+                                error.email && <p className="error" style={style.inputError} >{error.email}</p>
                             }
                             <label>
                                 <p>URL Facebook<span>*</span></p>
                                 <input type="text" placeholder="https://facebook.com" onChange={inputChange} name="fb" value={form.fb} />
                             </label>
                             {
-                                error.fb && <p className="error" style = {style.inputError} >{error.fb}</p>
+                                error.fb && <p className="error" style={style.inputError} >{error.fb}</p>
                             }
                             <label className="disable">
                                 <p>Sử dụng COIN</p>

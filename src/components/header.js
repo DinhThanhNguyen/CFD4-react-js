@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { context } from '../App'
+import { useLogin } from '../core/hook/useLogin'
 let $ = window.$
 export default function Header() {
 
-    useEffect( () => {
+    useEffect(() => {
         $('body').on('click', function () {
             $('.select.active .sub').fadeOut(200);
             $('.select sub').fadeOut(200);
         })
-    
+
         $('.menu-hambeger').on('click', function () {
             $('body').toggleClass('menu-is-show');
         });
-    
+
         $('#header nav ul').on('click', function (e) {
             e.stopPropagation();
         })
         $('.overlay_nav').on('click', function (e) {
             $('body').removeClass('menu-is-show');
         });
-    
+
         $(document).keyup(function (e) {
             if (e.key === "Escape") {
                 $('body').removeClass('menu-is-show');
@@ -50,6 +52,10 @@ export default function Header() {
         }, 600)
     }
 
+
+    let contextLogin = useContext(context)
+    let auth = useLogin();
+
     return (
         <>
             <header id="header">
@@ -67,27 +73,32 @@ export default function Header() {
                         <h1>CFD</h1>
                     </Link>
                     <div className="right">
-                        <div className="have-login">
-                            <div className="account">
-                                <a href="#" className="info">
-                                    <div className="name">Trần Lê Trọng Nghĩa</div>
-                                    <div className="avatar">
-                                        <img src="img/avt.png" alt="" />
+                        {
+                            auth.login ? (
+                                <div className="have-login">
+                                    <div className="account">
+                                        <a href="#" className="info">
+                                            <div className="name">{auth.login.name}</div>
+                                            <div className="avatar">
+                                                <img src="img/avt.png" alt="" />
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
-                            <div className="hamberger">
-                            </div>
-                            <div className="sub">
-                                <Link to="/thong-tin-ca-nhan" onClick={delayLink} >Thông tin tài khoản</Link>
-                                <Link to="/thong-tin-ca-nhan/khoa-hoc-cua-toi" onClick={delayLink} >Khóa học của tôi</Link>
-                                <a href="#">Đăng xuất</a>
-                            </div>
-                        </div>
-                        {/* <div class="not-login bg-none">
-                    <a href="#" class="btn-register">Đăng nhập</a>
-                    <a href="login.html" class="btn main btn-open-login">Đăng ký</a>
-                </div> */}
+                                    <div className="hamberger">
+                                    </div>
+                                    <div className="sub">
+                                        <Link to="/thong-tin-ca-nhan" onClick={delayLink} >Thông tin tài khoản</Link>
+                                        <Link to="/thong-tin-ca-nhan/khoa-hoc-cua-toi" onClick={delayLink} >Khóa học của tôi</Link>
+                                        <a href="#">Đăng xuất</a>
+                                    </div>
+                                </div>
+                            ) :
+                                <div class="not-login bg-none">
+                                    <a href="#" class="btn-register" onClick={contextLogin.openPopupLogin}>Đăng nhập</a>
+                                    <Link to="dang-ky" onClick={delayLink} class="btn main btn-open-login">Đăng ký</Link>
+                                </div>
+                        }
+
                     </div>
                 </div>
             </header>

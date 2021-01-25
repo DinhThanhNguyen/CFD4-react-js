@@ -17,32 +17,51 @@ import Project from './pages/project';
 import Collaborate from './pages/hop-tac';
 import Coin from './pages/coin';
 import Email from './pages/email';
-import Error from './pages/404-page';
+import Page404 from './pages/404-page';
 import Faq from './pages/faq';
 import CourseDetail from './pages/course-detail';
 import Loading from './components/Loading';
+import React, { useRef } from 'react';
+import AuthProvider from './core/hook/useLogin';
+import PrivateRoute from './core/PrivateRoute';
+
+
+export const context = React.createContext({});
+
 function App() {
-  return <BrowserRouter>
-  <Header />
-  <Switch>
-  <Route path="/khoa-hoc"><Course /></Route>
-  <Route path="/thong-tin-ca-nhan"><Profile /></Route>
-  <Route path="/lich-su-thanh-toan"><Payments /></Route>
-  <Route path="/chi-tiet-khoa-hoc"><CourseDetail /></Route>
-  <Route path="/team"><Team /></Route>
-  <Route path="/dang-ky"><Register /></Route>
-  <Route path="/du-an"><Project /></Route>
-  <Route path="/hop-tac"><Collaborate /></Route>
-  <Route path="/coin"><Coin /></Route>
-  <Route path="/email"><Email /></Route>
-  <Route path="/faq"><Faq /></Route>
-  <Route path="/" exact><Home /></Route>
-  <Route><Error /></Route>
-  </Switch>
-  <Footer />
-  <PopupLogin />
-  <Loading />
-  </BrowserRouter>
+  let refLogin = useRef();
+
+  function openPopupLogin() {
+    refLogin.current.style.display = 'flex'
+  }
+  function closePopupLogin() {
+    refLogin.current.style.display = 'none'
+  }
+  return <AuthProvider>
+    <context.Provider value={{ openPopupLogin, closePopupLogin }}>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route path="/khoa-hoc" component={Course} />
+          <PrivateRoute path="/thong-tin-ca-nhan" component={Profile} />
+          <PrivateRoute path="/lich-su-thanh-toan" component={Payments} />
+          <Route path="/chi-tiet-khoa-hoc" component={CourseDetail} />
+          <Route path="/team" component={Team} />
+          <Route path="/dang-ky" component={Register} />
+          <PrivateRoute path="/du-an" component={Project} />
+          <Route path="/hop-tac" component={Collaborate} />
+          <Route path="/coin" component={Coin} />
+          <Route path="/email" component={Email} />
+          <Route path="/faq" component={Faq} />
+          <Route path="/" exact component={Home} />
+          <Route path="" component={Page404} />
+        </Switch>
+        <Footer />
+        <PopupLogin ref={refLogin} />
+        <Loading />
+      </BrowserRouter>
+    </context.Provider>
+  </AuthProvider>
 }
 
 export default App;

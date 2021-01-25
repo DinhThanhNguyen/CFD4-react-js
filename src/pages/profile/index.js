@@ -9,8 +9,12 @@ import {
     Route,
     Switch
 } from 'react-router-dom'
+import { useLogin } from '../../core/hook/useLogin'
 
 export default function Profile() {
+
+    let auth = useLogin();
+
     return (
         <div>
             <main className="profile" id="main">
@@ -21,7 +25,7 @@ export default function Profile() {
                             <img src="img/avatar-lg.png" alt="" />
                             <div className="camera" />
                         </div>
-                        <div className="name">trần nghĩa</div>
+                        <div className="name">{auth.login.name}</div>
                         <p className="des">Thành viên của team CFD1-OFFLINE</p>
                     </div>
                     <div className="container">
