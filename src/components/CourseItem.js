@@ -6,7 +6,7 @@ export default function CourseItem(props) {
         <div className="col-md-4 course">
                 <div className="wrap">
                     <a className="cover" href="#">
-                        <img src={props.thumbnail} alt="" />
+                        <img src={props.thumbnail.link} alt="" />
                         <span className="badge b1">{props.status}</span>
                         <div className="hover">
                             <div className="top">
@@ -24,18 +24,18 @@ export default function CourseItem(props) {
                     </a>
                     <div className="info">
                         <a className="name" href="#">
-                           {props.name}
+                           {props.title}
                     </a>
                         <p className="des">
-                            {props.des}
+                            {props.short_description}
                     </p>
                     </div>
                     <div className="bottom">
                         <div className="teacher">
                             <div className="avatar">
-                                <img src="/img/avt.png" alt="" />
+                                <img src={props.teacher.avatar?.thumbnail?.['thumbnail-1'] || props.teacher.avatar.link} alt="" />
                             </div>
-                            <div className="name">{props.teacher}</div>
+                            <div className="name">{props.teacher.title}</div>
                         </div>
                         <Link to="dang-ky" className="register-btn">Đăng Ký</Link>
                     </div>

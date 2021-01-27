@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Action from './components/action'
 import Banner from './components/Banner'
 import CourseList from './components/CourseList'
@@ -7,11 +7,30 @@ import Gallery from './components/Gallery'
 import Testimonial from './components/testimonial'
 
 export default function Home() {
+
+  let [stage, setStage] = useState();
+  useEffect(() => {
+    fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/home')
+          .then(res => res.json())
+          .then(res => {
+            console.log(res)
+            setStage(res)
+            
+          })
+  }, [])
+
+
+
+  if(!stage) return <div style={{height: 500, display: 'flex'}}><div style={{margin: 'auto'}}>...Loaing</div></div>
+
+
+
+
   return (
     <div>
       <main className="homepage" id="main">
         <Banner />
-        <CourseList />
+        <CourseList offline={stage.offline} online={stage.online} />
         <Different />
         {/* <section class="section-3">
             <div class="container">
@@ -29,8 +48,8 @@ export default function Home() {
                 </div>
             </div>
         </section> */}
-        <Testimonial />
-        <Gallery />
+        <Testimonial list={stage.review} />
+        <Gallery list={stage.gallery} />
         <Action />
       </main>
     </div>

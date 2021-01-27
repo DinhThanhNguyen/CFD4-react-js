@@ -89,7 +89,7 @@ export default function Header() {
                                     <div className="sub">
                                         <Link to="/thong-tin-ca-nhan" onClick={delayLink} >Thông tin tài khoản</Link>
                                         <Link to="/thong-tin-ca-nhan/khoa-hoc-cua-toi" onClick={delayLink} >Khóa học của tôi</Link>
-                                        <a href="#">Đăng xuất</a>
+                                        <Link to="/" onClick={auth.logOut}>Đăng xuất</Link>
                                     </div>
                                 </div>
                             ) :

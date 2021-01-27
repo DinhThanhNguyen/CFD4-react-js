@@ -33,11 +33,11 @@ export default function Profile() {
                             <Menu />
                             <div className="tab-content">
                                 <Switch>
-                                    <Route path="/thong-tin-ca-nhan/khoa-hoc-cua-toi"><MyCourse /></Route>
-                                    <Route path="/thong-tin-ca-nhan/du-an-cua-toi"><MyProject /></Route>
-                                    <Route path="/thong-tin-ca-nhan/lich-su-thanh-toan"><History /></Route>
-                                    <Route path="/thong-tin-ca-nhan/quan-li-coin"><Coin /></Route>
-                                    <Route path="/thong-tin-ca-nhan"><Infor /></Route>
+                                <Route path="/thong-tin-ca-nhan/khoa-hoc-cua-toi" component={MyCourse} />
+                                <Route path="/thong-tin-ca-nhan/du-an-cua-toi" component={MyProject} />
+                                <Route path="/thong-tin-ca-nhan/lich-su-thanh-toan" component={History} />
+                                <Route path="/thong-tin-ca-nhan/quan-li-coin" component={Coin} />
+                                <Route path="/thong-tin-ca-nhan" component={Infor} />
                                 </Switch>
                             </div>
                         </div>

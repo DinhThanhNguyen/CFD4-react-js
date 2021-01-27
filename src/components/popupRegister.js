@@ -30,7 +30,6 @@ function PopupRegister(props, ref) {
         pattern: 'email'
       },
       password: {
-        required: true,
         min: 6,
         max: 32
       }

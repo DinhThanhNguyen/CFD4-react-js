@@ -19,7 +19,12 @@ export default function AuthProvider({ children }) {
             setLogin(data)
         }
     }
-    return <Context.Provider value={{ login, activeLogin }}>{ children }</Context.Provider>
+
+    function logOut() {
+        localStorage.removeItem('login')
+        setLogin(null)
+    }
+    return <Context.Provider value={{ login, activeLogin, logOut }}>{ children }</Context.Provider>
 }
 
 export function useLogin() {

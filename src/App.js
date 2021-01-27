@@ -56,7 +56,7 @@ function App() {
           <PrivateRoute path="/lich-su-thanh-toan" component={Payments} />
           <Route path="/chi-tiet-khoa-hoc" component={CourseDetail} />
           <Route path="/team" component={Team} />
-          <Route path="/dang-ky" component={Register} />
+          <PrivateRoute path="/dang-ky" component={Register} />
           <PrivateRoute path="/du-an" component={Project} />
           <Route path="/hop-tac" component={Collaborate} />
           <Route path="/coin" component={Coin} />
