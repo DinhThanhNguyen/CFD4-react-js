@@ -5,7 +5,7 @@ export default function CourseItem(props) {
     return (
         <div className="col-md-4 course">
                 <div className="wrap">
-                    <a className="cover" href="#">
+                    <Link className="cover" to={`/chi-tiet-khoa-hoc/${props.slug}`}>
                         <img src={props.thumbnail.link} alt="" />
                         <span className="badge b1">{props.status}</span>
                         <div className="hover">
@@ -21,8 +21,8 @@ export default function CourseItem(props) {
                                 <img src="/img/icon-viewmore.svg" alt="" />
                             </div>
                         </div>
-                    </a>
-                    <div className="info">
+                    </Link>
+                    <div className="info" to={`/chi-tiet-khoa-hoc/${props.slug}`}>
                         <a className="name" href="#">
                            {props.title}
                     </a>
@@ -37,7 +37,7 @@ export default function CourseItem(props) {
                             </div>
                             <div className="name">{props.teacher.title}</div>
                         </div>
-                        <Link to="dang-ky" className="register-btn">Đăng Ký</Link>
+                        <Link to={`/dang-ky/${props.slug}`} className="register-btn">Đăng Ký</Link>
                     </div>
                 </div>
             </div>

@@ -117,7 +117,7 @@ export default function Header() {
                         <Link to="/khoa-hoc" onClick={delayLink} >Khóa Học</Link>
                     </li>
                     <li>
-                        <Link to="/thong-tin-ca-nhan/du-an" onClick={delayLink} >Dự Án</Link>
+                        <Link to="/thanh-toan" onClick={delayLink} >Thanh toán</Link>
                     </li>
                     <li>
                         <Link to="hop-tac" onClick={delayLink} >Liên hệ</Link>

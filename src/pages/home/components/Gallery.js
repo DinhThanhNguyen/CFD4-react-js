@@ -43,8 +43,8 @@ export default function Gallery({ list }) {
       </div>
       <div className="list">
         {
-          list.map((e, index) => <div className="item carousel-cell">
-          <img key={index} data-flickity-lazyload={e} alt="" />
+          list.map((e, index) => <div key={index} className="item carousel-cell">
+          <img  data-flickity-lazyload={e} alt="" />
         </div>)
         }
       </div>

@@ -1,5 +1,3 @@
-import { List } from '@material-ui/core';
-import { keys } from '@material-ui/core/styles/createBreakpoints';
 import React, { useEffect } from 'react'
 
 export default function Testimonial({ list }) {
@@ -63,7 +61,7 @@ export default function Testimonial({ list }) {
             <div className="item">
               <div className="text">
                 {
-                  list.map((e, index) => <div className={`ct ct-${index + 1} ${index === 0 ? 'active' : ''}`}>
+                  list.map((e, index) => <div key={index} className={`ct ct-${index + 1} ${index === 0 ? 'active' : ''}`}>
                     <div className="info">
                       <div className="name">
                         <h4>{e.name}</h4>
@@ -82,7 +80,7 @@ export default function Testimonial({ list }) {
               <div className="images">
                 <div className="list">
                   {
-                    list.map((e) => <div className="carousel-cell">
+                    list.map((e, index) => <div key={index} className="carousel-cell">
                       <div className="img">
                         <picture>
                           <source media="(max-width: 767px)" srcSet="img/Intersect.png" />

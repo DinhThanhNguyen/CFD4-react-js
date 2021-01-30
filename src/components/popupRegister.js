@@ -3,6 +3,7 @@ import { context } from '../App'
 import ReactDOM from 'react-dom'
 import useValidateForm from '../core/hook/useValidateForm'
 import { useLogin } from '../core/hook/useLogin'
+import Email from '../pages/email'
 
 
 const style = {

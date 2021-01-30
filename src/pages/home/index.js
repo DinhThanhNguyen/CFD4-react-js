@@ -15,7 +15,6 @@ export default function Home() {
           .then(res => {
             console.log(res)
             setStage(res)
-            
           })
   }, [])
 

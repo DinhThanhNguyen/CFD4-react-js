@@ -10,12 +10,12 @@ export default function MemberProject() {
           <h2 className="main-title">THÀNH VIÊN</h2>
         </div>
         <div className="list row">
-          <CourseItem thumbnail="/img/img.png" name="React JS"
+          {/* <CourseItem thumbnail="/img/img.png" name="React JS"
             des="One of the best corporate fashion brands in Sydney" teacher="Đặng Vương" />
           <CourseItem thumbnail="/img/img2.png" name="Animation"
             des="One of the best corporate fashion brands in Sydney" teacher="Trần Nghĩa" />
           <CourseItem thumbnail="/img/img3.png" name="Scss, Grunt JS và Boostrap 4"
-            des="One of the best corporate fashion brands in Sydney" teacher="Trần Nghĩa" />
+            des="One of the best corporate fashion brands in Sydney" teacher="Trần Nghĩa" /> */}
         </div>
       </div>
     </section>

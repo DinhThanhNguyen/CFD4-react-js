@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Email() {
     return (
@@ -12,7 +13,7 @@ export default function Email() {
                         <p>
                             Bạn đã đăng ký khóa học <a href="#" target="_blank" style={{ textDecoration: 'none', color: '#00afab' }}><strong>CFD2 Căn Bản</strong></a> tại <strong>CFD</strong> thành công, chúng tôi sẽ chủ động liên hệ thông qua số điện thoại của bạn.
               </p>
-                        <a href="#" target="_blank" className="btn" style={{ backgroundColor: '#00afab', borderRadius: '50px', padding: '10px 20px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', textDecoration: 'none', textTransform: 'uppercase', fontSize: '14px', marginTop: '20px' }}>Trang chủ CFD</a>
+                        <Link to="/" target="_blank" className="btn" style={{ backgroundColor: '#00afab', borderRadius: '50px', padding: '10px 20px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', textDecoration: 'none', textTransform: 'uppercase', fontSize: '14px', marginTop: '20px' }}>Trang chủ CFD</Link>
                     </div>
                 </div>
                 <div className="bottom" style={{ fontSize: '13px', background: '#ddd', padding: '30px 50px', color: '#767676' }}>

@@ -13,7 +13,7 @@ import Team from './pages/team';
 import Payments from './pages/thanh-toan';
 import Profile from './pages/profile';
 import Course from './pages/khoa-hoc';
-import Register from './pages/register';
+import Register from'./pages/register';
 import Project from './pages/project';
 import Collaborate from './pages/hop-tac';
 import Coin from './pages/coin';
@@ -53,10 +53,10 @@ function App() {
         <Switch>
           <Route path="/khoa-hoc" component={Course} />
           <PrivateRoute path="/thong-tin-ca-nhan" component={Profile} />
-          <PrivateRoute path="/lich-su-thanh-toan" component={Payments} />
-          <Route path="/chi-tiet-khoa-hoc" component={CourseDetail} />
+          <Route path="/thanh-toan" component={Payments} />
+          <Route path="/chi-tiet-khoa-hoc/:slug" component={CourseDetail} />
           <Route path="/team" component={Team} />
-          <PrivateRoute path="/dang-ky" component={Register} />
+          <PrivateRoute path="/dang-ky/:slug" component={Register} />
           <PrivateRoute path="/du-an" component={Project} />
           <Route path="/hop-tac" component={Collaborate} />
           <Route path="/coin" component={Coin} />
