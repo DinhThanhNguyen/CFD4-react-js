@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useRouteMatch } from 'react-router-dom';
+import pageApi from '../../api/pageApi';
 import useValidateForm from '../../core/hook/useValidateForm';
 
 const style = {
@@ -10,19 +12,24 @@ const style = {
     }
 }
 
-// function isVietnamesePhoneNumber(number) {
-//     return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
-// }
-// function isUrl(s) {
-//     var regexp = /(ftp|http|https):\/\/www.facebook.com(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-//     return regexp.test(s);
-// }
-// function validateEmail(email) {
-//     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return re.test(email);
-// }
 
 export default function Register() {
+
+    let [loading, setLoading] = useState(false);
+
+    let [course, setCourse] = useState();
+
+    let routerMath = useRouteMatch();
+    let params = useLocation();
+
+    useEffect(async () => {
+        let courses = await pageApi.course_detail(routerMath.params.slug)
+        if(courses.data) {
+            setCourse(courses.data)
+        } else {
+            setCourse('Notfound')
+        }
+    })
 
     let { form, error, inputChange, submit } = useValidateForm({
         username: '',
@@ -62,25 +69,6 @@ export default function Register() {
         }
     })
 
-
-
-
-
-    // let [error, setError] = useState({});
-
-    // function inputChange(event) {
-    //     let target = event.target;
-
-    //     let value = target.value;
-
-    //     let name = target.getAttribute('name');
-
-    //     form[name] = value;
-
-    //     setForm({
-    //         ...form
-    //     })
-    // }
     function validateForm() {
         
         // if (!form.username) {
@@ -110,18 +98,31 @@ export default function Register() {
 
 
         let error = submit();
+        console.log(error)
+        if(Object.keys(error).length === 0) {
+            setLoading(true)
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000);
+        }
     }
+
+    if (!course) return <div style={{ height: 500, display: 'flex' }}><div style={{ margin: 'auto' }}>...Loaing</div></div>
+
+    if (course === 'Notfound') return <div style={{ height: 500, display: 'flex' }}><div style={{ margin: 'auto' }}>Khoá học không tồn tại</div></div>
+
+    let money = new Intl.NumberFormat('vn').format(course.money)
     return (
         <main className="register-course" id="main">
             <section>
                 <div className="container">
                     <div className="wrap container">
                         <div className="main-sub-title">ĐĂNG KÝ</div>
-                        <h1 className="main-title">Thực chiến front-end căn bản </h1>
+                        <h1 className="main-title">{course.title} </h1>
                         <div className="main-info">
-                            <div className="date"><strong>Khai giảng:</strong> 15/11/2020</div>
-                            <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
-                            <div className="time"><strong>Học phí:</strong> 6.000.000 VND</div>
+                            <div className="date"><strong>Khai giảng:</strong> {course.opening_time}</div>
+                            <div className="time"><strong>Thời lượng:</strong> {course.video_count} buổi</div>
+                            <div className="time"><strong>Học phí:</strong> {money} VND</div>
                         </div>
                         <div className="form">
                             <label>

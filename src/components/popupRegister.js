@@ -1,9 +1,8 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext } from 'react'
 import { context } from '../App'
 import ReactDOM from 'react-dom'
 import useValidateForm from '../core/hook/useValidateForm'
 import { useLogin } from '../core/hook/useLogin'
-import Email from '../pages/email'
 
 
 const style = {

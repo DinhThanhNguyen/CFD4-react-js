@@ -7,7 +7,6 @@ export default function Course() {
         fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/courses')
             .then(res => res.json())
             .then(res => {
-                console.log(res)
                 setStage(res)
             })
     }, [])

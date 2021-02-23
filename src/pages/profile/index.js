@@ -12,28 +12,48 @@ import {
     useRouteMatch
 } from 'react-router-dom'
 import { useLogin } from '../../core/hook/useLogin'
+import UserApi from '../../api/UserApi'
+
+
+
+
+
+const styles = {
+    inputFile: {
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        opacity: 0,
+        zIndex: 100,
+        cursor: 'pointer'
+    }
+}
+
 
 export default function Profile() {
 
     let auth = useLogin();
     let login = true;
-    let path = useRouteMatch();
+    let { path } = useRouteMatch();
     let avatarRef = useRef();
 
     if (!login) return <Redirect to="/"></Redirect>
 
     function dataChange(e) {
         if (e.currentTarget.files[0]) {
-            let formData = new formData();
+            let formData = new FormData();
             formData.append('avatar', e.currentTarget.files[0])
 
 
-            userApi.updatevatar(formData)
+            UserApi.updateAvatar(formData)
                 .then(res => {
-                    if (res.data){
+                    if (res.data) {
                         auth.activeLogin(res.data)
                     }
-            })
+                })
         }
     }
     return (
@@ -42,7 +62,8 @@ export default function Profile() {
                 <section>
                     <div className="top-info">
                         <div className="avatar">
-                            <img src="img/avatar-lg.png" alt="" />
+                            <img src={auth.login.avatar?.link || "/img/avatar-default.png"} alt="" />
+                            <input type="file" style={{ display: 'none' }} style={styles.inputFile} ref={avatarRef} onChange={dataChange} />
                             <div className="camera" />
                         </div>
                         <div className="name">{auth.login.name}</div>
@@ -53,11 +74,11 @@ export default function Profile() {
                             <Menu />
                             <div className="tab-content">
                                 <Switch>
-                                    <Route path="/thong-tin-ca-nhan/khoa-hoc-cua-toi" component={MyCourse} />
-                                    <Route path="/thong-tin-ca-nhan/du-an-cua-toi" component={MyProject} />
-                                    <Route path="/thong-tin-ca-nhan/lich-su-thanh-toan" component={History} />
-                                    <Route path="/thong-tin-ca-nhan/quan-li-coin" component={Coin} />
-                                    <Route path="/thong-tin-ca-nhan" component={Infor} />
+                                    <Route path={`${path}/khoa-hoc-cua-toi`}><MyCourse /></Route>
+                                    <Route path={`${path}/du-an-cua-toi`}><MyProject /></Route>
+                                    <Route path={`${path}/lich-su-thanh-toan`}><History /> </Route>
+                                    <Route path={`${path}/quan-li-coin`}><Coin /> </Route>
+                                    <Route><Infor /></Route>
                                 </Switch>
                             </div>
                         </div>
@@ -66,4 +87,9 @@ export default function Profile() {
             </main>
         </div>
     )
+}
+
+
+class Profile2 extends React.Component {
+
 }

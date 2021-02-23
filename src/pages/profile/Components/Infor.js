@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
+import UserApi from '../../../api/UserApi';
+import { useLogin } from '../../../core/hook/useLogin';
+import useValidateForm from '../../../core/hook/useValidateForm';
 
 const style = {
     inputError: {
@@ -8,59 +11,57 @@ const style = {
         marginBottom: '20px'
     }
 }
-function isVietnamesePhoneNumber(number) {
-    return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
-}
-function isUrl(s) {
-    var regexp = /(ftp|http|https):\/\/www.facebook.com(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-    return regexp.test(s);
-}
 
 export default function Infor() {
-    let [form, setForm] = useState({
-        username: '',
-        phone: '',
-        fb: '',
-        skype: ''
-    })
-    let [error, setError] = useState({});
-    function inputChange(event) {
-        let target = event.target;
-        let value = target.value;
-        let name = target.getAttribute('name');
-        form[name] = value;
-        setForm({
-            ...form
-        })
-    }
-    function validateForm() {
-        let error = {};
-        if (!form.username) {
-            error['username'] = "Họ và Tên không được để trống";
-        }
-        if (!form.phone) {
-            error['phone'] = "Số điện thoại không được để trống";
-        }
-        else if (!isVietnamesePhoneNumber(form.phone)) {
-            error['phone'] = "Số điện thoại không đúng định dạng";
-        }
-        if (!form.fb) {
-            error['fb'] = "Facebook không được để trống";
-        } else if (!(isUrl(form.fb))) {
-            error['fb'] = "Facebook không đúng định dạng";
-        }
-        if (!form.skype) {
-            error['skype'] = "Skype không được để trống"
-        }
-        setError(error)
-    }
+    let auth = useLogin();
 
+    let { form, error, inputChange, submit } = useValidateForm({
+        name: auth.login.name,
+        phone: auth.login.phone,
+        email: auth.login.email,
+        fb: auth.login.fb,
+        skype: auth.login.skype,
+    }, {
+        rule: {
+            name: {
+                required: true
+            },
+            phone: {
+                required: true,
+                pattern: 'phone'
+            },
+            fb: {
+                pattern: /https?:\/\/(www\.)?facebook.com\/[-a-zA-Z0-9@:%._\+~#=]{1,256}/
+            },
+            skype: {
+                required: true
+            }
+        },
+        message: {
+            fb: {
+                pattern: 'Facebook không đúng định dạng'
+            }
+        }
+    })
+
+    function btnSubmit() {
+        let error = submit();
+        if(Object.keys(error).length === 0) {
+            UserApi.update(form)
+                .then(res => {
+                    if(res.data){
+                        alert('Cập nhật thành công')
+                        auth.activeLogin(res.data)
+                    }
+                })
+        }
+    }
 
     return (
         <div className="tab1">
             <label>
                 <p>Họ và tên<span>*</span></p>
-                <input type="text" placeholder="Nguyễn Văn A" onChange={inputChange} name="username" value={form.username} />
+                <input type="text" placeholder="Nguyễn Văn A" onChange={inputChange} name="name" value={form.name} />
             </label>
             {
                 error.username && <p className="error" style={style.inputError} >{error.username}</p>
@@ -90,7 +91,7 @@ export default function Infor() {
             {
                 error.skype && <p className="error" style={style.inputError} >{error.skype}</p>
             }
-            <div className="btn main rect" onClick={validateForm}>LƯU LẠI</div>
+            <div className="btn main rect" onClick={btnSubmit}>LƯU LẠI</div>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import Different from './components/Different'
 import Gallery from './components/Gallery'
 import Testimonial from './components/testimonial'
 
+
 export default function Home() {
 
   let [stage, setStage] = useState();

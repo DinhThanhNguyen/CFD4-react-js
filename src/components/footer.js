@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -16,13 +17,13 @@ export default function Footer() {
               </p>
               <p className="phone">(+84) 98 9596 913</p>
               <div className="social">
-                <a href="#">
+                <a href="/">
                   <img src="img/fb-icon.png" alt="" />
                 </a>
-                <a href="#">
+                <a href="/">
                   <img src="img/email-icon.png" alt="" />
                 </a>
-                <a href="#">
+                <a href="/">
                   <img src="img/skype-icon.png" alt="" />
                 </a>
               </div>
@@ -31,22 +32,22 @@ export default function Footer() {
               <nav>
                 <ul>
                   <li>
-                    <a href="#">Trang chủ</a>
+                    <Link to="/" exact>Trang chủ</Link>
                   </li>
                   <li>
-                    <a href="#">Khóa học</a>
+                    <Link to="/khoa-hoc">Khóa học</Link>
                   </li>
                   <li>
-                    <a href="#">Thanh toán</a>
+                    <Link to="/thanh-toan">Thanh toán</Link>
                   </li>
                   <li>
-                    <a href="#">Điều khoản</a>
+                    <Link to="/">Điều khoản</Link>
                   </li>
                 </ul>
               </nav>
             </div>
           </div>
-          <a href="#" className="back-to-top">
+          <a href="/" className="back-to-top">
             <div className="line" />
             CUỘN LÊN
           </a>
