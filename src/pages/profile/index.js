@@ -62,12 +62,12 @@ export default function Profile() {
                 <section>
                     <div className="top-info">
                         <div className="avatar">
-                            <img src={auth.login.avatar?.link || "/img/avatar-default.png"} alt="" />
+                            <img src={auth.login.avatar?.link || "/img/avatar.jpg"} alt="" />
                             <input type="file" style={{ display: 'none' }} style={styles.inputFile} ref={avatarRef} onChange={dataChange} />
                             <div className="camera" />
                         </div>
                         <div className="name">{auth.login.name}</div>
-                        <p className="des">Thành viên của team CFD1-OFFLINE</p>
+                        <p className="des">Thành viên của team CFD2-OFFLINE</p>
                     </div>
                     <div className="container">
                         <div className="tab">

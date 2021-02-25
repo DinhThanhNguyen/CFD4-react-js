@@ -27,7 +27,8 @@ export default {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
-            }
+            },
+            body: JSON.stringify(data)
         })
         .then(res => res.json())
     }),
@@ -39,7 +40,8 @@ export default {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${accessToken}`
-            }
+            },
+            body: data
         })
         .then(res => res.json())
     }
