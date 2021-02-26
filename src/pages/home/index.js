@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import pageApi from '../../api/pageApi'
 import Action from './components/action'
 import Banner from './components/Banner'
 import CourseList from './components/CourseList'
@@ -11,10 +12,8 @@ export default function Home() {
 
   let [stage, setStage] = useState();
   useEffect(() => {
-    fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/home')
-          .then(res => res.json())
+    pageApi.home()
           .then(res => {
-            console.log(res)
             setStage(res)
           })
   }, [])

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import pageApi from '../../api/pageApi';
 import List from './component/List'
 export default function Course() {
 
     let [stage, setStage] = useState();
     useEffect(() => {
-        fetch('http://cfd-reactjs.herokuapp.com/elearning/v4/courses')
-            .then(res => res.json())
+        pageApi.courses()
             .then(res => {
                 setStage(res)
             })

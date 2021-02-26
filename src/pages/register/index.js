@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import pageApi from '../../api/pageApi';
 import useValidateForm from '../../core/hook/useValidateForm';
 
@@ -20,7 +20,6 @@ export default function Register() {
     let [course, setCourse] = useState();
 
     let routerMath = useRouteMatch();
-    let params = useLocation();
 
     useEffect(async () => {
         let courses = await pageApi.course_detail(routerMath.params.slug)

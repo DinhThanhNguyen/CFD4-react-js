@@ -9,8 +9,7 @@ export default function Team() {
             <div className="top">
               <h2 className="main-title">CFD team</h2>
               <p className="top-des">Lorem ipsum dolor sit amet consectetur adipiscing elit. aliquam tincidunt
-                elementum
-                sem non luctus
+                elementum sem non luctus
               </p>
             </div>
             <div className="list row">

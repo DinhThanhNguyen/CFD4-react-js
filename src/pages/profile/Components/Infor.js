@@ -75,7 +75,7 @@ export default function Infor() {
             }
             <label>
                 <p>Email<span>*</span></p>
-                <input defaultValue="vuong.dang@dna.vn" disabled type="text" />
+                <input defaultValue={auth.login.email} disabled type="text" />
             </label>
             <label>
                 <p>Facebook<span>*</span></p>

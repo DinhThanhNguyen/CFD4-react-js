@@ -3,6 +3,10 @@ import { domain } from "../core/Api"
 
 
 export default {
+    home: () => {
+        return fetch(`${domain}/elearning/v4/home`)
+        .then (res => res.json())
+    },
     course_detail: (slug) => {
         return fetch(`${domain}/elearning/v4/course/${slug}`)
             .then(res => res.json())
@@ -12,12 +16,12 @@ export default {
             .then(res => res.json())
     },
     contact: (data) => {
-        return fetch(`{domain}/elearning/v4/contact`, {
+        return fetch(`${domain}/elearning/v4/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
             .then (res => res.json())
     }

@@ -63,7 +63,7 @@ function App() {
           <Route path="/email" component={Email} />
           <Route path="/faq" component={Faq} />
           <Route path="/" exact component={Home} />
-          <Route path="" component={Page404} />
+          <Route path="/" component={Page404} />
         </Switch>
         <Footer />
         <PopupLogin ref={refLogin} />
