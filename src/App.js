@@ -15,7 +15,7 @@ import Profile from './pages/profile';
 import Course from './pages/khoa-hoc';
 import Register from'./pages/register';
 import Project from './pages/project';
-import Collaborate from './pages/hop-tac';
+import Contact from './pages/hop-tac';
 import Coin from './pages/coin';
 import Email from './pages/email';
 import Page404 from './pages/404-page';
@@ -58,7 +58,7 @@ function App() {
           <Route path="/team" component={Team} />
           <PrivateRoute path="/dang-ky/:slug" component={Register} />
           <PrivateRoute path="/du-an" component={Project} />
-          <Route path="/hop-tac" component={Collaborate} />
+          <Route path="/lien-he" component={Contact} />
           <Route path="/coin" component={Coin} />
           <Route path="/email" component={Email} />
           <Route path="/faq" component={Faq} />
